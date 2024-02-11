@@ -1,6 +1,6 @@
 import React from "react";
 
-const Lessons = () => {
+const ImageGallery = () => {
   return (
     <div className="flex flex-col h-screen w-screen bg-[url('/2.jpg')] bg-center md:bg-right-top bg-fixed flex-grow md:bg-cover ">
       <div className="bg-black text-[#a99a66] py-[2%] px-[0.8%] absolute top-[50vh]">
@@ -32,4 +32,4 @@ const Lessons = () => {
   );
 };
 
-export default Lessons;
+export default ImageGallery;

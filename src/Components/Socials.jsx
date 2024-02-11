@@ -12,7 +12,11 @@ const Socials = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <img className="w-8 h-8 hover:scale-125" src="/youtube.svg" alt="" />
+          <img
+            className="w-8 h-8 hover:scale-125"
+            src="https://cdn-icons-png.flaticon.com/256/1384/1384060.png"
+            alt=""
+          />
         </Link>
       </div>
       <div>
@@ -21,7 +25,11 @@ const Socials = () => {
           target="_blank"
           rel="noreferrer"
         >
-          <img className="w-8 h-8 hover:scale-125" src="/insta.svg" alt="" />
+          <img
+            className="w-8 h-8 hover:scale-125"
+            src="https://cdn-icons-png.flaticon.com/512/174/174855.png"
+            alt=""
+          />
         </Link>
       </div>
     </div>
