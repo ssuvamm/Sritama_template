@@ -6,6 +6,7 @@ import Videos from "./pages/Videos";
 import Contact from "./pages/Contact";
 import Navbar from "./Components/Navbar";
 import ImageGallery from "./pages/ImageGallery";
+import Footer from "./Components/Footer";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/images" element={<ImageGallery />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
       </Routes>
+      <Footer />
     </div>
   );
 };
