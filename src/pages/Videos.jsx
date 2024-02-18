@@ -2,7 +2,7 @@ import React from "react";
 
 const Videos = () => {
   return (
-    <div className="flex flex-col h-screen w-screen bg-[url('/2.jpg')] bg-center md:bg-right-top bg-fixed flex-grow md:bg-cover ">
+    <div className="flex flex-col h-[160vh] md:h-[110vh] w-screen bg-[url('/2.jpg')] bg-center md:bg-right-top bg-fixed flex-grow md:bg-cover ">
       <div className="bg-black text-[#a99a66] py-[2%] px-[0.8%] absolute top-[50vh]">
         <h1 className="text-2xl font-bold"> Videos</h1>
         <div className="flex justify-evenly flex-grow w-screen flex-wrap">

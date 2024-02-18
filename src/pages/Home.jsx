@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Socials from "../Components/Socials";
 const Home = () => {
   return (
-    <div className=" ">
+    <div>
       <div className="flex flex-col h-screen w-screen bg-[url('/2.jpg')] bg-center md:bg-right-top bg-fixed flex-grow md:bg-cover ">
         <h1 className="text-7xl font-bold pt-[10vh] flex items-center pl-[15%] fixed">
           Sritama's Artistry

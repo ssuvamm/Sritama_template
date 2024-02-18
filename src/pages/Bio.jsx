@@ -2,11 +2,10 @@ import React from "react";
 
 const Bio = () => {
   return (
-    <div className="flex flex-col h-[150vh] w-screen bg-[url('/2.jpg')] bg-center md:bg-right-top bg-fixed flex-grow md:bg-cover ">
-      <div></div>
-      <div className="bg-inherit  py-[2%] px-[0.8%] absolute top-[50vh]">
+    <div className="flex flex-col md:h-[150vh] h-[125vh] w-screen bg-[url('/2.jpg')] bg-center md:bg-right-top bg-fixed flex-grow md:bg-cover ">
+      <div className="bg-inherit  py-[2%] px-[0.8%] absolute top-[30vh] md:top-[50vh]">
         <h1 className="text-2xl font-bold px-[2%] pb-[2%]">Bio</h1>
-        <div className="py-[2%] px-[2%] bg-black bg-opacity-50 w-1/2 text-justify text-purple-400">
+        <div className="py-[2%] px-[2%] bg-black bg-opacity-50 md:w-1/2 text-justify text-purple-400">
           <p className="">
             Sritama was a junior artist for 10 years at All India Radio. During
             her tenure, she engaged in various activities, including recitation
@@ -25,7 +24,7 @@ const Bio = () => {
           </p>
         </div>
         <div className="flex justify-end py-[1%] my-[1%]">
-          <div className="py-[2%] px-[2%] bg-black bg-opacity-50 w-1/2  text-justify text-purple-400">
+          <div className="py-[2%] px-[2%] bg-black bg-opacity-50 md:w-1/2  text-justify text-purple-400">
             <p>
               Having performed in various musical concerts in Kolkata, Sritama
               and her friend Pratyaya Raha achieved success with their joint
