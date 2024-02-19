@@ -10,8 +10,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar text-2xl bg-transparent fixed top-0 flex place-content-between py-[1%] w-full z-50">
-      <div className="hidden md:flex place-content-between w-full px-[1%]">
+    <nav className="navbar text-2xl bg-inherit fixed top-0 flex place-content-between py-[1%] w-full z-50">
+      <div className="hidden md:flex place-content-between w-full px-[6%]">
         <Link
           to="/"
           className="text-purple-950  hover:text-purple-400 transition-all delay-100 ease-in-out"
