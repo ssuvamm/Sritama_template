@@ -14,7 +14,7 @@ const Navbar = () => {
       <div className="hidden md:flex place-content-between w-full px-[6%]">
         <Link
           to="/"
-          className="text-purple-950  hover:text-purple-400 transition-all delay-100 ease-in-out"
+          className="text-purple-950  hover:text-purple-400  transition-all delay-100 ease-in-out"
         >
           <h2>Home</h2>
         </Link>
