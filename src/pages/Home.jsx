@@ -10,7 +10,7 @@ const Home = () => {
       transition={{ duration: 1 }}
     >
       <div>
-        <div className="flex flex-col h-screen w-screen md:bg-[url('/2up.jpg')] bg-[url('/2.jpg')] bg-center md:bg-right-top bg-fixed flex-grow md:bg-cover ">
+        <div className="h-screen w-screen md:bg-[url('/2up.jpg')] bg-[url('/2.jpg')] bg-center md:bg-right-top bg-fixed  md:bg-cover ">
           <h1 className="text-7xl font-bold pt-[10vh] flex items-center pl-[15%] fixed">
             Sritama's Artistry
           </h1>
