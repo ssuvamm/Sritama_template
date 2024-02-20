@@ -26,7 +26,7 @@ const Contact = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 1 }}
     >
-      <div className="flex flex-col md:h-[120vh] w-screen bg-[url('/2.jpg')] bg-center md:bg-right-top bg-fixed flex-grow md:bg-cover ">
+      <div className="flex flex-col md:h-[120vh] w-screen md:bg-[url('/2up.jpg')] bg-[url('/2.jpg')] bg-center md:bg-right-top bg-fixed flex-grow md:bg-cover ">
         <div className="flex flex-grow justify-center items-end h-screen">
           <form
             className=" max-w-[90%] w-full p-6 bg-gray-300 rounded-lg shadow-md"

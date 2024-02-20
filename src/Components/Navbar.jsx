@@ -14,30 +14,30 @@ const Navbar = () => {
       <div className="hidden md:flex place-content-between w-full px-[6%]">
         <Link
           to="/"
-          className="text-purple-950  hover:text-purple-400  transition-all delay-100 ease-in-out"
+          className="text-[#6A2C70]  hover:text-[#B83B5E]  transition-all delay-100 ease-in-out"
         >
           <h2>Home</h2>
         </Link>
         <Link
-          className="text-purple-950   hover:text-purple-400 transition-all delay-100 ease-in-out ml-4"
+          className="text-[#6A2C70]    hover:text-[#B83B5E] transition-all delay-100 ease-in-out ml-4"
           to="/bio"
         >
           <h2>Bio</h2>
         </Link>
         <Link
-          className="text-purple-950   hover:text-purple-400 transition-all delay-100 ease-in-out ml-4"
+          className="text-[#6A2C70]    hover:text-[#B83B5E] transition-all delay-100 ease-in-out ml-4"
           to="/videos"
         >
           <h2>Music Gallery</h2>
         </Link>
         <Link
-          className="text-purple-950   hover:text-purple-400 transition-all delay-100 ease-in-out ml-4"
+          className="text-[#6A2C70]    hover:text-[#B83B5E] transition-all delay-100 ease-in-out ml-4"
           to="/images"
         >
           <h2>Image Gallery</h2>
         </Link>
         <Link
-          className="text-purple-950   hover:text-purple-400 transition-all delay-100 ease-in-out ml-4"
+          className="text-[#6A2C70]    hover:text-[#B83B5E] transition-all delay-100 ease-in-out ml-4"
           to="/contact"
         >
           <h2>Contact</h2>
@@ -46,7 +46,7 @@ const Navbar = () => {
       <div className="md:hidden flex">
         <button
           onClick={toggleMenu}
-          className="text-purple-950 hover:text-purple-400 transition-all delay-100 ease-in-out focus:outline-none z-50 ml-3 mt-2"
+          className="text-[#6A2C70]  hover:text-[#B83B5E] transition-all delay-100 ease-in-out focus:outline-none z-50 ml-3 mt-2"
         >
           ☰
         </button>
@@ -57,35 +57,35 @@ const Navbar = () => {
                 <Link
                   to="/"
                   onClick={toggleMenu}
-                  className="text-purple-950 hover:text-purple-400 transition-all delay-100 ease-in-out block"
+                  className="text-[#6A2C70]  hover:text-[#B83B5E] transition-all delay-100 ease-in-out block"
                 >
                   Home
                 </Link>
                 <Link
                   to="/bio"
                   onClick={toggleMenu}
-                  className="text-purple-950 hover:text-purple-400 transition-all delay-100 ease-in-out block mt-2"
+                  className="text-[#6A2C70]  hover:text-[#B83B5E] transition-all delay-100 ease-in-out block mt-2"
                 >
                   Bio
                 </Link>
                 <Link
                   to="/videos"
                   onClick={toggleMenu}
-                  className="text-purple-950 hover:text-purple-400 transition-all delay-100 ease-in-out block mt-2"
+                  className="text-[#6A2C70]  hover:text-[#B83B5E] transition-all delay-100 ease-in-out block mt-2"
                 >
                   Music Gallery
                 </Link>
                 <Link
                   to="/images"
                   onClick={toggleMenu}
-                  className="text-purple-950 hover:text-purple-400 transition-all delay-100 ease-in-out block mt-2"
+                  className="text-[#6A2C70]  hover:text-[#B83B5E] transition-all delay-100 ease-in-out block mt-2"
                 >
                   Image Gallery
                 </Link>
                 <Link
                   to="/contact"
                   onClick={toggleMenu}
-                  className="text-purple-950 hover:text-purple-400 transition-all delay-100 ease-in-out block mt-2"
+                  className="text-[#6A2C70]  hover:text-[#B83B5E] transition-all delay-100 ease-in-out block mt-2"
                 >
                   Contact
                 </Link>
@@ -94,7 +94,7 @@ const Navbar = () => {
             <div>
               <Link
                 onClick={toggleMenu}
-                className="text-purple-950 hover:text-purple-400 transition-all delay-100 ease-in-out block  text-center mt-[70%] bg-white bg-opacity-70 p-4 rounded-lg"
+                className="text-[#6A2C70]  hover:text-[#B83B5E] transition-all delay-100 ease-in-out block  text-center mt-[70%] bg-white bg-opacity-70 p-4 rounded-lg"
               >
                 X
               </Link>

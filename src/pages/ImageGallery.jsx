@@ -9,7 +9,7 @@ const ImageGallery = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 1 }}
     >
-      <div className="flex flex-col h-screen w-screen bg-[url('/2.jpg')] bg-center md:bg-right-top bg-fixed flex-grow md:bg-cover ">
+      <div className="flex flex-col h-screen w-screen md:bg-[url('/2up.jpg')] bg-[url('/2.jpg')] bg-center md:bg-right-top bg-fixed flex-grow md:bg-cover ">
         <div className="bg-black text-[#a99a66] py-[2%] px-[0.8%] absolute top-[50vh]">
           <h1 className="text-2xl font-bold">Lessons</h1>
           <p className="py-[10%]">
