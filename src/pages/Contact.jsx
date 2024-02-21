@@ -21,10 +21,10 @@ const Contact = () => {
   };
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1 }}
+      initial={{ y: "100%" }}
+      animate={{ y: "0%" }}
+      exit={{ opacity: 1 }}
+      transition={{ duration: 0.75, ease: "easeOut" }}
     >
       <div className="  w-screen md:bg-[url('/2up.jpg')] bg-[url('/2.jpg')] bg-center md:bg-right-top bg-fixed  md:bg-cover ">
         <div className="flex flex-grow justify-center items-end h-screen">

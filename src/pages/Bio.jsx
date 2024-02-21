@@ -4,10 +4,10 @@ import { motion } from "framer-motion";
 const Bio = () => {
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1 }}
+      initial={{ y: "100%" }}
+      animate={{ y: "0%" }}
+      exit={{ opacity: 1 }}
+      transition={{ duration: 0.75, ease: "easeOut" }}
     >
       <div className=" md:h-[160vh] h-[125vh] w-screen md:bg-[url('/2up.jpg')] bg-[url('/2.jpg')] bg-center md:bg-right-top bg-fixed  md:bg-cover ">
         <div className="bg-inherit  py-[2%] px-[0.8%] absolute top-[30vh] md:top-[50vh]">
