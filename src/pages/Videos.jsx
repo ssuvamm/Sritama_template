@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 const Videos = () => {
   return (
     <motion.div
-      initial={{ y: "100%" }}
+      initial={{ y: "50%" }}
       animate={{ y: "0%" }}
-      exit={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{ duration: 0.75, ease: "easeOut" }}
     >
       <div className=" w-screen md:bg-[url('/2up.jpg')] bg-[url('/2.jpg')] bg-center md:bg-right-top bg-fixed md:bg-cover ">

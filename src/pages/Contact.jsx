@@ -21,7 +21,7 @@ const Contact = () => {
   };
   return (
     <motion.div
-      initial={{ y: "100%" }}
+      initial={{ y: "50%" }}
       animate={{ y: "0%" }}
       exit={{ opacity: 1 }}
       transition={{ duration: 0.75, ease: "easeOut" }}
