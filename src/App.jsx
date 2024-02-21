@@ -13,7 +13,7 @@ const App = () => {
   return (
     <div className="relative">
       <Navbar />
-      <AnimatePresence initial={false}>
+      <AnimatePresence>
         <Routes key={location.pathname}>
           <Route path="/" element={<Home />}></Route>
           <Route path="/bio" element={<Bio />}></Route>
