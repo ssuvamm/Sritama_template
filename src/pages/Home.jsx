@@ -11,7 +11,7 @@ const Home = () => {
     >
       <div>
         <div className="h-screen w-screen md:bg-[url('/2up.jpg')] bg-[url('/2.jpg')] bg-center md:bg-right-top bg-fixed  md:bg-cover ">
-          <h1 className="text-7xl font-bold pt-[10vh] flex items-center pl-[15%] fixed">
+          <h1 className="text-7xl font-bold lg:pt-[10vh] pt-[45vh] flex items-center lg:pl-[15%] fixed lg:text-black text-white">
             Sritama's Artistry
           </h1>
         </div>

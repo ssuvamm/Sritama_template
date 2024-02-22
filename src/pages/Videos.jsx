@@ -9,8 +9,8 @@ const Videos = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.75, ease: "easeOut" }}
     >
-      <div className=" w-screen md:bg-[url('/2up.jpg')] bg-[url('/2.jpg')] bg-center md:bg-right-top bg-fixed md:bg-cover ">
-        <div className="md:hidden flex flex-grow h-[60vh] w-screen"></div>
+      <div className=" lg:bg-[url('/2up.jpg')] bg-[url('/2.jpg')]  bg-top lg:bg-right-top bg-fixed lg:bg-cover ">
+        <div className="lg:hidden flex flex-grow h-[90vh] w-screen"></div>
         <div className="flex flex-grow justify-center items-end lg:h-[140vh] md:h-[120vh] h-screen">
           <div className="bg-black text-[#a99a66] py-[2%] px-[0.8%] absolute ">
             <h1 className="text-2xl font-bold"> Videos</h1>
