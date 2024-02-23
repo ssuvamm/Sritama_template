@@ -4,17 +4,18 @@ import { motion } from "framer-motion";
 const Videos = () => {
   return (
     <motion.div
-      initial={{ y: "50%" }}
-      animate={{ y: "0%" }}
+      initial={{ y: "50%", opacity: 0 }}
+      animate={{ y: "0%", opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.75, ease: "easeOut" }}
     >
-      <div className=" lg:bg-[url('/2up.jpg')] bg-[url('/2.jpg')]  bg-top lg:bg-right-top bg-fixed lg:bg-cover ">
-        <div className="lg:hidden flex flex-grow h-[90vh] w-screen"></div>
+      <div>
+        <div className="lg:hidden flex  h-[70vh] "></div>
+        <div className="hidden lg:flex h-[10vh] "></div>
         <div className="flex flex-grow justify-center items-end lg:h-[140vh] md:h-[120vh] h-screen">
-          <div className="bg-black text-[#a99a66] py-[2%] px-[0.8%] absolute ">
+          <div className="bg-[#333333] md:rounded-lg text-[#CCCCCC] py-[2%] px-[0.8%]  ">
             <h1 className="text-2xl font-bold"> Videos</h1>
-            <div className="flex justify-evenly flex-grow w-screen flex-wrap">
+            <div className="flex justify-evenly flex-grow md:w-[90vw] flex-wrap">
               <div className="py-[1.5%]">
                 <iframe src="https://www.youtube.com/embed/W-xfKXI225w?si=Wq0giPCYVTN1kUr0"></iframe>
               </div>
@@ -25,7 +26,7 @@ const Videos = () => {
                 <iframe src="https://www.youtube.com/embed/nWuaWCYV48M?si=duus4z0R3s6fx8RR"></iframe>
               </div>
             </div>
-            <div className="flex justify-evenly flex-grow w-screen flex-wrap">
+            <div className="flex justify-evenly flex-grow  md:w-[90vw] flex-wrap">
               <div className="py-[1.5%]">
                 <iframe src="https://www.youtube.com/embed/T6agE9zhG0g?si=HFgXT76GjfxheG1b"></iframe>
               </div>

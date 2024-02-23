@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 const ImageGallery = () => {
   return (
     <motion.div
-      initial={{ y: "50%" }}
-      animate={{ y: "0%" }}
-      exit={{ opacity: 1 }}
+      initial={{ y: "50%", opacity: 0 }}
+      animate={{ y: "0%", opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{ duration: 0.75, ease: "easeOut" }}
     >
-      <div className="  h-screen w-screen md:bg-[url('/2up.jpg')] bg-[url('/2.jpg')] bg-center md:bg-right-top bg-fixed md:bg-cover ">
+      <div>
         <div className="flex flex-grow justify-center items-end h-screen">
           <div className="bg-black text-[#a99a66] py-[2%] px-[0.8%] absolute ">
             <h1 className="text-2xl font-bold">Lessons</h1>
