@@ -13,7 +13,7 @@ const Bio = () => {
         <div className=" md:h-[30vh] h-[55vh] "></div>
         <div className="bg-inherit  py-[2%] px-[0.8%] ">
           <h1 className="text-4xl font-bold px-[2%] pb-[2%] text-white">Bio</h1>
-          <div className="py-[2%] px-[2%] bg-[#222222] bg-opacity-60 md:w-1/2 text-justify text-[#999999]">
+          <div className="py-[2%] px-[2%] bg-[#222222] bg-opacity-60 md:w-1/2 text-justify text-[#F6C90E]">
             <p className="">
               Sritama was a junior artist for 10 years at All India Radio.
               During her tenure, she engaged in various activities, including
@@ -32,7 +32,7 @@ const Bio = () => {
             </p>
           </div>
           <div className="flex justify-end py-[1%] my-[1%]">
-            <div className="py-[2%] px-[2%] bg-[#222222] bg-opacity-60 md:w-1/2 text-justify text-[#999999]">
+            <div className="py-[2%] px-[2%] bg-[#222222] bg-opacity-60 md:w-1/2 text-justify text-[#F6C90E]">
               <p>
                 Having performed in various musical concerts in Kolkata, Sritama
                 and her friend Pratyaya Raha achieved success with their joint

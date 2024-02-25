@@ -17,13 +17,6 @@ const Home = () => {
         <div className=" bottom-0 bg-inherit">
           <Socials />
         </div>
-        <div className=" bottom-0 py-[1%] bg-[#333333] text-[#CCCCCC]">
-          <h1 className="text-2xl font-bold pl-[0.5%]">Latest News</h1>
-          <p className="text-xl pl-[0.5%]">
-            Sritama Basu is currently offering music lessons. Please visit the
-            'Lessons' tab for details.
-          </p>
-        </div>
       </div>
     </motion.div>
   );

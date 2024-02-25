@@ -24,6 +24,7 @@ const Navbar = () => {
       <div className="hidden md:flex place-content-between w-full px-[6%]">
         <Link
           to="/"
+          onClick={handleScrollToTop}
           className="text-[#F6C90E]  hover:text-[#6D6D6D]  transition-all delay-100 ease-in-out"
         >
           <h2>Home</h2>
@@ -31,24 +32,28 @@ const Navbar = () => {
         <Link
           className="text-[#F6C90E]  hover:text-[#6D6D6D] transition-all delay-100 ease-in-out ml-4"
           to="/bio"
+          onClick={handleScrollToTop}
         >
           <h2>Bio</h2>
         </Link>
         <Link
           className="text-[#F6C90E]  hover:text-[#6D6D6D] transition-all delay-100 ease-in-out ml-4"
           to="/videos"
+          onClick={handleScrollToTop}
         >
           <h2>Music Gallery</h2>
         </Link>
         <Link
           className="text-[#F6C90E]  hover:text-[#6D6D6D] transition-all delay-100 ease-in-out ml-4"
           to="/images"
+          onClick={handleScrollToTop}
         >
           <h2>Image Gallery</h2>
         </Link>
         <Link
           className="text-[#F6C90E]  hover:text-[#6D6D6D] transition-all delay-100 ease-in-out ml-4"
           to="/contact"
+          onClick={handleScrollToTop}
         >
           <h2>Contact</h2>
         </Link>
