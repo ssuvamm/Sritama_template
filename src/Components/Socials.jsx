@@ -4,7 +4,7 @@ import "../App.css";
 
 const Socials = () => {
   return (
-    <div className="py-[1%] flex items-center place-content-evenly ">
+    <div className="flex place-content-evenly items-center py-[1%] ">
       <div>
         <Link
           to="https://www.youtube.com/@SritamaBasu/"
@@ -12,7 +12,7 @@ const Socials = () => {
           rel="noreferrer"
         >
           <img
-            className="w-8 h-8 hover:scale-125"
+            className="h-8 w-8 hover:scale-125"
             src="https://cdn-icons-png.flaticon.com/256/1384/1384060.png"
             alt=""
           />
@@ -25,7 +25,7 @@ const Socials = () => {
           rel="noreferrer"
         >
           <img
-            className="w-8 h-8 hover:scale-125"
+            className="h-8 w-8 hover:scale-125"
             src="https://cdn-icons-png.flaticon.com/512/174/174855.png"
             alt=""
           />

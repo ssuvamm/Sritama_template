@@ -27,12 +27,12 @@ const Contact = () => {
       transition={{ duration: 0.75, ease: "easeOut" }}
     >
       <div>
-        <div className="flex flex-grow justify-center items-end h-screen">
+        <div className="flex h-screen flex-grow items-end justify-center">
           <form
-            className=" max-w-[90%] w-full p-6 bg-gray-300 rounded-lg shadow-md"
+            className=" w-full max-w-[90%] rounded-lg bg-gray-300 p-6 shadow-md"
             onSubmit={handleSubmit}
           >
-            <label htmlFor="name" className="block mb-2">
+            <label htmlFor="name" className="mb-2 block">
               Name
               <input
                 type="text"
@@ -40,11 +40,11 @@ const Contact = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="form-input block w-full mt-1"
+                className="form-input mt-1 block w-full"
                 required
               />
             </label>
-            <label htmlFor="email" className="block mb-2">
+            <label htmlFor="email" className="mb-2 block">
               Email
               <input
                 type="email"
@@ -52,25 +52,25 @@ const Contact = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="form-input block w-full mt-1"
+                className="form-input mt-1 block w-full"
                 required
               />
             </label>
-            <label htmlFor="message" className="block mb-2">
+            <label htmlFor="message" className="mb-2 block">
               Message
               <textarea
                 id="message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                className="form-textarea block w-full mt-1"
+                className="form-textarea mt-1 block w-full"
                 rows="3"
                 required
               ></textarea>
             </label>
             <button
               type="submit"
-              className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
             >
               Submit
             </button>

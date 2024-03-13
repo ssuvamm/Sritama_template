@@ -10,12 +10,12 @@ const Videos = () => {
       transition={{ duration: 0.75, ease: "easeOut" }}
     >
       <div>
-        <div className="lg:hidden flex  h-[70vh] "></div>
-        <div className="hidden lg:flex h-[10vh] "></div>
-        <div className="flex flex-grow justify-center items-end lg:h-[140vh] md:h-[120vh] h-screen">
-          <div className="bg-[#333333] md:rounded-lg text-[#CCCCCC] py-[2%] px-[0.8%]  ">
+        <div className="flex h-[70vh]  lg:hidden "></div>
+        <div className="hidden h-[10vh] lg:flex "></div>
+        <div className="flex h-screen flex-grow items-end justify-center md:h-[120vh] lg:h-[140vh]">
+          <div className="bg-[#333333] px-[0.8%] py-[2%] text-[#CCCCCC] md:rounded-lg  ">
             <h1 className="text-2xl font-bold"> Videos</h1>
-            <div className="flex justify-evenly flex-grow md:w-[90vw] flex-wrap">
+            <div className="flex flex-grow flex-wrap justify-evenly md:w-[90vw]">
               <div className="py-[1.5%]">
                 <iframe src="https://www.youtube.com/embed/W-xfKXI225w?si=Wq0giPCYVTN1kUr0"></iframe>
               </div>
@@ -26,7 +26,7 @@ const Videos = () => {
                 <iframe src="https://www.youtube.com/embed/nWuaWCYV48M?si=duus4z0R3s6fx8RR"></iframe>
               </div>
             </div>
-            <div className="flex justify-evenly flex-grow  md:w-[90vw] flex-wrap">
+            <div className="flex flex-grow flex-wrap  justify-evenly md:w-[90vw]">
               <div className="py-[1.5%]">
                 <iframe src="https://www.youtube.com/embed/T6agE9zhG0g?si=HFgXT76GjfxheG1b"></iframe>
               </div>
