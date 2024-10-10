@@ -3,6 +3,6 @@ builder = "npm"
 build = "npm install && npm run build"
 
 [run]
-start = "npm run preview -- --port 4173"
+start = "npm run preview -- --port 4173 --host"
 ports = ["4173"]
 
