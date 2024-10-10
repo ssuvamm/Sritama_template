@@ -1,0 +1,10 @@
+[build]
+# Specify the build command
+builder = "npm"
+build = "npm install && npm run build"
+
+[run]
+# Command to run the app
+start = "npm run preview"
+# Specify the port where the app runs
+ports = ["4173"]
