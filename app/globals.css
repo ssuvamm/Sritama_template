@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .all-\[unset\] {
+    all: unset;
+  }
+}
+
+body {
+  background-image: url("/2bwup.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  @media screen and (min-width: 768px) {
+    background-position: right top;
+  }
+
+  @media screen and (max-width: 768px) {
+    background-position: center;
+  }
+}

@@ -1,0 +1,6 @@
+[build]
+builder = "npm"
+build = "npm install && npm run build"
+
+[run]
+start = "npm run start"
