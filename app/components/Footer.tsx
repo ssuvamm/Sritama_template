@@ -1,14 +1,97 @@
+import Link from 'next/link';
+import { Mail, Music, Heart, Disc3 } from 'lucide-react';
+import { YoutubeIcon, InstagramIcon } from './Icons';
 
+export default function Footer() {
+  return (
+    <footer className="relative mt-20 border-t border-gold-500/20 bg-stone-950 text-stone-400 overflow-hidden">
+      {/* Subtle ambient lighting element */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-1 bg-gradient-to-r from-transparent via-gold-500/40 to-transparent blur-xs" />
 
-const Footer = () => {
-    return (
-      <>
-        <div className="bg-[#222222] p-10 text-center text-[#999999]">
-          <p>Copyright © 2024 Sritama Basu. All Rights Reserved.</p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
+          {/* Brand Col */}
+          <div className="md:col-span-5 space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gold-400 to-amber-600 flex items-center justify-center text-stone-950 shadow-md">
+                <Disc3 className="w-4 h-4 animate-spin-slow" />
+              </div>
+              <h3 className="font-serif text-2xl font-bold text-gold-gradient">
+                Sritama Basu
+              </h3>
+            </div>
+            <p className="text-stone-300 text-sm leading-relaxed max-w-md">
+              Accomplished vocalist, former All India Radio artist, and versatile performer 
+              specializing in Classical (Dhrupad & Khayal), Rabindra Sangeet, Contemporary, and Folk music.
+            </p>
+          </div>
+
+          {/* Navigation Links */}
+          <div className="md:col-span-4 space-y-3">
+            <h4 className="font-serif text-lg font-semibold text-gold-300">Quick Links</h4>
+            <ul className="grid grid-cols-2 gap-2 text-sm">
+              <li>
+                <Link href="/" className="hover:text-gold-400 transition-colors">Home</Link>
+              </li>
+              <li>
+                <Link href="/bio" className="hover:text-gold-400 transition-colors">Biography</Link>
+              </li>
+              <li>
+                <Link href="/videos" className="hover:text-gold-400 transition-colors">Music Gallery</Link>
+              </li>
+              <li>
+                <Link href="/images" className="hover:text-gold-400 transition-colors">Photo Gallery</Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-gold-400 transition-colors">Contact & Booking</Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Social Links */}
+          <div className="md:col-span-3 space-y-4">
+            <h4 className="font-serif text-lg font-semibold text-gold-300">Connect</h4>
+            <div className="flex items-center gap-3">
+              <a
+                href="https://www.youtube.com/@SritamaBasu/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-stone-900 border border-gold-500/20 flex items-center justify-center text-stone-300 hover:text-red-500 hover:border-red-500/40 hover:bg-stone-800 transition-all shadow-sm"
+                aria-label="YouTube Channel"
+              >
+                <YoutubeIcon className="w-5 h-5" />
+              </a>
+              <a
+                href="https://www.instagram.com/sritamabasu/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-stone-900 border border-gold-500/20 flex items-center justify-center text-stone-300 hover:text-pink-400 hover:border-pink-400/40 hover:bg-stone-800 transition-all shadow-sm"
+                aria-label="Instagram Profile"
+              >
+                <InstagramIcon className="w-5 h-5" />
+              </a>
+              <Link
+                href="/contact"
+                className="w-10 h-10 rounded-full bg-stone-900 border border-gold-500/20 flex items-center justify-center text-stone-300 hover:text-gold-400 hover:border-gold-500/40 hover:bg-stone-800 transition-all shadow-sm"
+                aria-label="Contact Email"
+              >
+                <Mail className="w-5 h-5" />
+              </Link>
+            </div>
+            <p className="text-xs text-stone-400">
+              For bookings, live performances, and collaborations.
+            </p>
+          </div>
         </div>
-      </>
-    );
-  };
-  
-  export default Footer;
-  
+
+        {/* Bottom Bar */}
+        <div className="mt-12 pt-6 border-t border-stone-900 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-400 gap-4">
+          <p>© {new Date().getFullYear()} Sritama Basu. All rights reserved.</p>
+          <p className="flex items-center gap-1">
+            Crafted with <Heart className="w-3.5 h-3.5 text-gold-500 fill-gold-500" /> for timeless music
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}

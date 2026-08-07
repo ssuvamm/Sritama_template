@@ -9,7 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Montserrat Variable", "sans-serif"],
+        serif: ["var(--font-serif)", "Playfair Display", "Georgia", "serif"],
+        sans: ["var(--font-sans)", "Plus Jakarta Sans", "system-ui", "sans-serif"],
+      },
+      colors: {
+        gold: {
+          300: '#FFF0C3',
+          400: '#E6C280',
+          500: '#D4AF37',
+          600: '#AA8820',
+          700: '#806310',
+        },
       },
     },
   },
@@ -17,3 +27,4 @@ const config: Config = {
 };
 
 export default config;
+

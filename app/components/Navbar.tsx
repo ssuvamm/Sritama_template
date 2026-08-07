@@ -1,129 +1,153 @@
-'use client'
-import { motion as m } from "framer-motion";
-import Link from "next/link";
-import { useState } from "react";
+'use client';
 
-const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
-  
-    const toggleMenu = () => {
-      setIsOpen(!isOpen);
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, Music, Disc3, Mic2, Image as ImageIcon, Mail, Home, User } from 'lucide-react';
+
+const navLinks = [
+  { name: 'Home', href: '/', icon: Home },
+  { name: 'Biography', href: '/bio', icon: User },
+  { name: 'Music Gallery', href: '/videos', icon: Mic2 },
+  { name: 'Photo Gallery', href: '/images', icon: ImageIcon },
+  { name: 'Contact', href: '/contact', icon: Mail },
+];
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
     };
-  
-    const handleScrollToTop = () => {
-      window.scrollTo({ top: 0 });
-    };
-  
-    function handleMultipleFunctions() {
-      toggleMenu();
-      handleScrollToTop();
-    }
-  
-    return (
-      <nav className="navbar fixed top-0 z-50 flex w-full place-content-between bg-inherit py-[1%] text-2xl">
-        <div className="hidden w-full place-content-between px-[6%] md:flex">
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close mobile drawer on route change
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+        scrolled
+          ? 'bg-stone-950/85 backdrop-blur-md border-b border-gold-500/20 py-3 shadow-2xl'
+          : 'bg-gradient-to-b from-stone-950/90 via-stone-950/40 to-transparent py-5'
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        {/* Brand Logo */}
+        <Link href="/" className="group flex items-center gap-3 focus:outline-none">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gold-400 via-gold-500 to-amber-700 p-0.5 shadow-lg group-hover:scale-105 transition-transform">
+            <div className="w-full h-full bg-stone-950 rounded-full flex items-center justify-center">
+              <Disc3 className="w-5 h-5 text-gold-400 animate-spin-slow group-hover:rotate-45 transition-transform" />
+            </div>
+          </div>
+          <div className="flex flex-col">
+            <span className="font-serif text-xl sm:text-2xl font-bold tracking-wide text-gold-gradient">
+              Sritama Basu
+            </span>
+            <span className="text-[10px] tracking-widest uppercase text-stone-400 font-sans font-medium">
+              Vocalist & Performer
+            </span>
+          </div>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-1 bg-stone-900/60 p-1.5 rounded-full border border-gold-500/20 backdrop-blur-lg shadow-inner">
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            const Icon = link.icon;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
+                  isActive
+                    ? 'text-gold-300 font-semibold'
+                    : 'text-stone-300 hover:text-gold-400 hover:bg-stone-800/50'
+                }`}
+              >
+                <Icon className={`w-4 h-4 ${isActive ? 'text-gold-400' : 'text-stone-400'}`} />
+                <span>{link.name}</span>
+                {isActive && (
+                  <motion.div
+                    layoutId="activeNavTab"
+                    className="absolute inset-0 bg-gradient-to-r from-gold-500/15 via-gold-400/20 to-gold-500/15 rounded-full border border-gold-400/40 shadow-sm"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Book / Listen CTA button */}
+        <div className="hidden lg:flex items-center gap-3">
           <Link
-            href="/"
-            onClick={handleScrollToTop}
-            className="text-[#F6C90E]  transition-all  delay-100 ease-in-out hover:text-[#6D6D6D]"
-          >
-            <h2>Home</h2>
-          </Link>
-          <Link
-            className="ml-4  text-[#F6C90E] transition-all delay-100 ease-in-out hover:text-[#6D6D6D]"
-            href="/bio"
-            onClick={handleScrollToTop}
-          >
-            <h2>Bio</h2>
-          </Link>
-          <Link
-            className="ml-4  text-[#F6C90E] transition-all delay-100 ease-in-out hover:text-[#6D6D6D]"
-            href="/videos"
-            onClick={handleScrollToTop}
-          >
-            <h2>Music Gallery</h2>
-          </Link>
-          <Link
-            className="ml-4  text-[#F6C90E] transition-all delay-100 ease-in-out hover:text-[#6D6D6D]"
-            href="/images"
-            onClick={handleScrollToTop}
-          >
-            <h2>Image Gallery</h2>
-          </Link>
-          <Link
-            className="ml-4  text-[#F6C90E] transition-all delay-100 ease-in-out hover:text-[#6D6D6D]"
             href="/contact"
-            onClick={handleScrollToTop}
+            className="px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-gradient-to-r from-gold-500 via-amber-500 to-gold-600 text-stone-950 hover:brightness-110 shadow-lg shadow-gold-500/20 hover:shadow-gold-500/35 transition-all duration-300 transform hover:-translate-y-0.5"
           >
-            <h2>Contact</h2>
+            Booking & Contact
           </Link>
         </div>
-        <div className="flex md:hidden">
-          <button
-            onClick={toggleMenu}
-            className="z-50  ml-6 mt-4 text-[#F6C90E] transition-all delay-100 ease-in-out hover:text-[#6D6D6D] focus:outline-none"
+
+        {/* Mobile Hamburger Toggle */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden p-2.5 rounded-xl bg-stone-900/80 border border-gold-500/20 text-gold-400 hover:text-gold-300 focus:outline-none"
+          aria-label="Toggle menu"
+        >
+          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+      </div>
+
+      {/* Mobile Drawer Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="md:hidden border-b border-gold-500/20 bg-stone-950/95 backdrop-blur-xl overflow-hidden"
           >
-            ☰
-          </button>
-          {isOpen && (
-            <m.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="fixed left-0 top-0 flex h-full w-full flex-col items-center justify-center bg-gray-800 bg-opacity-50 text-center"
-            >
-              <div className="rounded-lg bg-white bg-opacity-60 p-4 ">
-                <div>
+            <div className="px-4 pt-3 pb-6 space-y-2 max-w-md mx-auto">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                const Icon = link.icon;
+                return (
                   <Link
-                    href="/"
-                    onClick={handleMultipleFunctions}
-                    className="block  text-[#F6C90E] transition-all delay-100 ease-in-out hover:text-[#6D6D6D]"
+                    key={link.href}
+                    href={link.href}
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-colors ${
+                      isActive
+                        ? 'bg-stone-900 text-gold-300 border border-gold-500/30'
+                        : 'text-stone-300 hover:bg-stone-900/60 hover:text-gold-400'
+                    }`}
                   >
-                    Home
+                    <Icon className={`w-5 h-5 ${isActive ? 'text-gold-400' : 'text-stone-400'}`} />
+                    <span>{link.name}</span>
                   </Link>
-                  <Link
-                    href="/bio"
-                    onClick={handleMultipleFunctions}
-                    className="mt-2  block text-[#F6C90E] transition-all delay-100 ease-in-out hover:text-[#6D6D6D]"
-                  >
-                    Bio
-                  </Link>
-                  <Link
-                    href="/videos"
-                    onClick={handleMultipleFunctions}
-                    className="mt-2  block text-[#F6C90E] transition-all delay-100 ease-in-out hover:text-[#6D6D6D]"
-                  >
-                    Music Gallery
-                  </Link>
-                  <Link
-                    href="/images"
-                    onClick={handleMultipleFunctions}
-                    className="mt-2  block text-[#F6C90E] transition-all delay-100 ease-in-out hover:text-[#6D6D6D]"
-                  >
-                    Image Gallery
-                  </Link>
-                  <Link
-                    href="/contact"
-                    onClick={handleMultipleFunctions}
-                    className="mt-2  block text-[#F6C90E] transition-all delay-100 ease-in-out hover:text-[#6D6D6D]"
-                  >
-                    Contact
-                  </Link>
-                </div>
-              </div>
-              <div>
+                );
+              })}
+              <div className="pt-4 border-t border-stone-800">
                 <Link
-                  href="/"
-                  onClick={toggleMenu}
-                  className="mt-[70%]  block rounded-lg bg-white bg-opacity-70 p-4  text-center text-[#F6C90E] transition-all delay-100 ease-in-out hover:text-[#6D6D6D]"
+                  href="/contact"
+                  className="block w-full text-center py-3 rounded-xl text-sm font-semibold uppercase tracking-wider bg-gradient-to-r from-gold-500 via-amber-500 to-gold-600 text-stone-950 shadow-md"
                 >
-                  X
+                  Booking & Contact
                 </Link>
               </div>
-            </m.div>
-          )}
-        </div>
-      </nav>
-    );
-  };
-  
-  export default Navbar;
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+}
