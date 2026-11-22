@@ -12,7 +12,6 @@ interface GalleryPhoto {
   title: string;
   category: string;
   description: string;
-  aspect: string;
 }
 
 const photosData: GalleryPhoto[] = [
@@ -22,7 +21,6 @@ const photosData: GalleryPhoto[] = [
     title: 'Classical Vocal Solos & Raga Performances',
     category: 'Concert Stage',
     description: 'Sritama performing Indian classical vocal solos during live concert engagements.',
-    aspect: 'aspect-[3/4]',
   },
   {
     id: '2',
@@ -30,7 +28,6 @@ const photosData: GalleryPhoto[] = [
     title: 'Dhrupad & Khayal Lineage Showcase',
     category: 'Studio Portrait',
     description: 'Portrait highlighting Sritama’s classical training under Dagar Ashram and Vidushi Suranjana Bose.',
-    aspect: 'aspect-[3/4]',
   },
   {
     id: '3',
@@ -38,7 +35,6 @@ const photosData: GalleryPhoto[] = [
     title: 'Rabindra Sangeet & Stage Performance',
     category: 'Live Recital',
     description: 'Stage performance capturing emotional depth during Tagore song recitals.',
-    aspect: 'aspect-[4/3]',
   },
   {
     id: '4',
@@ -46,7 +42,6 @@ const photosData: GalleryPhoto[] = [
     title: 'Bangamela Bay Area 2023 Performance',
     category: 'International Concert',
     description: 'Sritama performing live at Bangamela 2023 in California, US.',
-    aspect: 'aspect-[4/3]',
   },
   {
     id: '5',
@@ -54,7 +49,6 @@ const photosData: GalleryPhoto[] = [
     title: 'Eita Tomar Gaan — Concert Series',
     category: 'Stage Production',
     description: 'Moments from the acclaimed joint musical production "Eita Tomar Gaan" in Kolkata.',
-    aspect: 'aspect-[4/3]',
   },
   {
     id: '6',
@@ -62,7 +56,6 @@ const photosData: GalleryPhoto[] = [
     title: 'All India Radio Broadcast Era',
     category: 'Broadcasting',
     description: 'Archival memory from 10 years of radio presentational excellence and recitation.',
-    aspect: 'aspect-[3/4]',
   },
   {
     id: '7',
@@ -70,7 +63,6 @@ const photosData: GalleryPhoto[] = [
     title: 'Cultural Anchoring & Vocal Performance',
     category: 'Stage Anchoring',
     description: 'Hosting cultural festivals and presenting vocal musical productions.',
-    aspect: 'aspect-[4/3]',
   },
 ];
 
@@ -114,7 +106,7 @@ export default function ImagesSection() {
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 auto-rows-fr">
           {photosData.map((photo, idx) => (
             <motion.div
               key={photo.id}
@@ -123,10 +115,10 @@ export default function ImagesSection() {
               viewport={{ once: true }}
               transition={{ delay: idx * 0.08, duration: 0.5 }}
               onClick={() => setSelectedImage(photo)}
-              className="group relative cursor-pointer rounded-2xl overflow-hidden bg-stone-900 border border-gold-500/20 hover:border-gold-500/50 transition-all shadow-xl hover:shadow-2xl gold-border-glow"
+              className="group relative flex h-full flex-col cursor-pointer rounded-2xl overflow-hidden bg-stone-900 border border-gold-500/20 hover:border-gold-500/50 transition-all shadow-xl hover:shadow-2xl gold-border-glow"
             >
-              {/* Photo Image Container */}
-              <div className={`relative ${photo.aspect} w-full overflow-hidden bg-stone-950`}>
+              {/* Photo Image Container - flexes to fill the card so every tile is full-bleed */}
+              <div className="relative min-h-[280px] w-full flex-1 overflow-hidden bg-stone-950">
                 <Image
                   src={photo.src}
                   alt={photo.title}
