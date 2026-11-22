@@ -3,18 +3,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import {
-  Play,
-  Pause,
-  Volume2,
-  VolumeX,
-  Sparkles,
-  Music,
-  Award,
-  Globe,
-  Mic,
-  ArrowRight,
-} from 'lucide-react';
 
 const HERO_VIDEO_ID = 'W-xfKXI225w';
 const HERO_VIDEO_TITLE = 'Sritama Basu — Live Classical Performance Highlight';
@@ -27,26 +15,10 @@ declare global {
 }
 
 const highlightStats = [
-  {
-    icon: Award,
-    title: '10 Years AIR',
-    desc: 'Junior Artist at All India Radio (Anchor & Reciter)',
-  },
-  {
-    icon: Music,
-    title: 'Dhrupad & Khayal',
-    desc: 'Trained under Dagar Ashram & Vidushi Suranjana Bose',
-  },
-  {
-    icon: Globe,
-    title: 'Global Performances',
-    desc: 'Featured soloist at Bangamela Bay Area & US Concerts',
-  },
-  {
-    icon: Mic,
-    title: 'Original Releases',
-    desc: 'Acclaimed productions & original singles',
-  },
+  { title: '10 Years AIR', desc: 'Junior Artist at All India Radio (Anchor & Reciter)' },
+  { title: 'Dhrupad & Khayal', desc: 'Trained under Dagar Ashram & Vidushi Suranjana Bose' },
+  { title: 'Global Performances', desc: 'Featured soloist at Bangamela Bay Area & US Concerts' },
+  { title: 'Original Releases', desc: 'Acclaimed productions & original singles' },
 ];
 
 const featuredGenres = [
@@ -67,7 +39,7 @@ const featuredGenres = [
   },
 ];
 
-// Every hero element now enters from above and settles downward.
+// Every hero element enters from above and settles downward.
 const slideDown = (delay: number) => ({
   initial: { opacity: 0, y: -28 },
   animate: { opacity: 1, y: 0 },
@@ -134,7 +106,6 @@ export default function HeroSection() {
       }
     }
 
-    // Browsers often block autoplay-with-sound; offer a one-tap retry if it never starts.
     const nudge = window.setTimeout(() => {
       if (playerRef.current?.getPlayerState?.() !== window.YT?.PlayerState?.PLAYING) {
         setNeedsGesture(true);
@@ -207,26 +178,21 @@ export default function HeroSection() {
       {/* ---------- Full-bleed video stage ---------- */}
       <div className="relative flex min-h-[92vh] items-center">
         <div className="absolute inset-0 overflow-hidden bg-stone-950">
-          {/* 16:9 video scaled to cover the viewport */}
           <div className="absolute left-1/2 top-1/2 h-[max(56.25vw,100vh)] w-[max(100vw,177.78vh)] -translate-x-1/2 -translate-y-1/2">
             <div id="hero-youtube-player" className="pointer-events-none h-full w-full" />
           </div>
-
-          {/* Fades that keep the copy legible above the moving footage */}
           <div className="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-950/85 to-stone-950/25 sm:to-stone-950/40" />
           <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-stone-950/70" />
           <div className="pointer-events-none absolute -left-40 top-1/4 h-[600px] w-[600px] rounded-full bg-gold-500/10 blur-3xl" />
         </div>
 
-        {/* Copy floats over the video */}
         <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-28 sm:px-6 lg:px-8">
           <div className="max-w-3xl space-y-6">
             <motion.div
               {...slideDown(0.05)}
-              className="inline-flex items-center gap-2 rounded-full border border-gold-500/30 bg-stone-950/70 px-4 py-1.5 text-xs font-medium text-gold-400 backdrop-blur-md sm:text-sm"
+              className="inline-flex items-center rounded-full border border-gold-500/30 bg-stone-950/70 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-gold-400 backdrop-blur-md sm:text-sm"
             >
-              <Sparkles className="h-4 w-4 text-gold-400" />
-              <span>Classical &amp; Contemporary Vocalist</span>
+              Classical &amp; Contemporary Vocalist
             </motion.div>
 
             <motion.h1
@@ -246,45 +212,29 @@ export default function HeroSection() {
             <motion.div {...slideDown(0.35)} className="flex flex-wrap items-center gap-4 pt-2">
               <Link
                 href="/videos"
-                className="flex items-center gap-2 rounded-full bg-gradient-to-r from-gold-500 via-amber-500 to-gold-600 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-stone-950 shadow-xl shadow-gold-500/20 transition-all hover:-translate-y-0.5 hover:brightness-110 hover:shadow-gold-500/40"
+                className="rounded-full bg-gradient-to-r from-gold-500 via-amber-500 to-gold-600 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-stone-950 shadow-xl shadow-gold-500/20 transition-all hover:-translate-y-0.5 hover:brightness-110 hover:shadow-gold-500/40"
               >
-                <Play className="h-4 w-4 fill-stone-950" />
-                <span>Explore Music</span>
+                Explore Music
               </Link>
-
               <Link
                 href="/bio"
-                className="flex items-center gap-2 rounded-full border border-gold-500/30 bg-stone-950/70 px-7 py-3.5 text-sm font-semibold tracking-wider text-gold-300 backdrop-blur-md transition-all hover:border-gold-500/50 hover:bg-stone-900/80"
+                className="rounded-full border border-gold-500/30 bg-stone-950/70 px-7 py-3.5 text-sm font-semibold tracking-wider text-gold-300 backdrop-blur-md transition-all hover:border-gold-500/50 hover:bg-stone-900/80"
               >
-                <span>Read Biography</span>
-                <ArrowRight className="h-4 w-4" />
+                Read Biography
               </Link>
             </motion.div>
           </div>
 
-          {/* Something extra where the old stat row used to sit */}
+          {/* On Air strip - typography only, no decorative glyphs */}
           <motion.div {...slideDown(0.5)} className="mt-10 max-w-3xl space-y-4">
-            <div className="flex items-center gap-4 rounded-2xl border border-gold-500/30 bg-stone-950/65 p-4 shadow-2xl backdrop-blur-md">
-              <div className="flex h-9 items-end gap-1" aria-hidden="true">
-                {[14, 26, 18, 34, 22, 30, 16].map((height, index) => (
-                  <span
-                    key={index}
-                    className="w-1 animate-pulse rounded-full bg-gold-400"
-                    style={{ height, animationDelay: `${index * 130}ms` }}
-                  />
-                ))}
-              </div>
-              <div className="min-w-0 flex-1 space-y-1">
-                <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-gold-400">
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
-                  </span>
+            <div className="flex items-center justify-between gap-4 rounded-2xl border border-gold-500/30 bg-stone-950/65 p-4 shadow-2xl backdrop-blur-md">
+              <div className="min-w-0 space-y-1">
+                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold-400">
                   On Air · Now Playing
                 </div>
                 <p className="truncate text-sm font-medium text-stone-100">{HERO_VIDEO_TITLE}</p>
               </div>
-              <div className="hidden text-right text-[10px] uppercase tracking-widest text-stone-500 sm:block">
+              <div className="hidden shrink-0 text-right text-[10px] uppercase tracking-widest text-stone-500 sm:block">
                 Live from the stage
                 <br />
                 Vol {volume}%
@@ -292,49 +242,43 @@ export default function HeroSection() {
             </div>
 
             <div className="flex flex-wrap gap-2">
-              {highlightStats.map((stat, index) => {
-                const Icon = stat.icon;
-                return (
-                  <div
-                    key={index}
-                    title={stat.desc}
-                    className="flex items-center gap-2 rounded-full border border-gold-500/20 bg-stone-950/60 px-3 py-1.5 text-[11px] text-stone-300 backdrop-blur-md transition-colors hover:border-gold-500/40 hover:text-gold-300"
-                  >
-                    <Icon className="h-3.5 w-3.5 text-gold-400" />
-                    <span>{stat.title}</span>
-                  </div>
-                );
-              })}
+              {highlightStats.map((stat, index) => (
+                <div
+                  key={index}
+                  title={stat.desc}
+                  className="rounded-full border border-gold-500/20 bg-stone-950/60 px-3 py-1.5 text-[11px] text-stone-300 backdrop-blur-md transition-colors hover:border-gold-500/40 hover:text-gold-300"
+                >
+                  {stat.title}
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>
 
-        {/* One-tap fallback when the browser blocks autoplay with sound */}
         {needsGesture && (
           <button
             onClick={startWithSound}
-            className="absolute left-1/2 top-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full border border-gold-500/50 bg-stone-950/80 px-5 py-3 text-xs font-semibold uppercase tracking-widest text-gold-300 shadow-2xl backdrop-blur-md transition hover:bg-stone-900"
+            className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold-500/50 bg-stone-950/80 px-5 py-3 text-xs font-semibold uppercase tracking-widest text-gold-300 shadow-2xl backdrop-blur-md transition hover:bg-stone-900"
           >
-            <Play className="h-4 w-4 fill-gold-300" />
             Tap to play with sound
           </button>
         )}
 
-        {/* Player controls - pause / mute / volume (starts at 30%) */}
-        <div className="absolute bottom-6 right-4 z-20 flex items-center gap-3 rounded-full border border-gold-500/25 bg-stone-950/75 px-3 py-2 shadow-xl backdrop-blur-md sm:right-8">
+        <div className="absolute bottom-6 right-4 z-20 flex items-center gap-3 rounded-full border border-gold-500/25 bg-stone-950/75 px-4 py-2 shadow-xl backdrop-blur-md sm:right-8">
           <button
             onClick={togglePlay}
-            className="text-gold-300 transition hover:text-gold-100"
+            className="text-xs font-semibold uppercase tracking-wider text-gold-300 transition hover:text-gold-100"
             aria-label={isPlaying ? 'Pause hero video' : 'Play hero video'}
           >
-            {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+            {isPlaying ? 'Pause' : 'Play'}
           </button>
+          <span className="h-3 w-px bg-stone-700" />
           <button
             onClick={toggleMute}
-            className="text-gold-300 transition hover:text-gold-100"
+            className="text-xs font-semibold uppercase tracking-wider text-gold-300 transition hover:text-gold-100"
             aria-label={isMuted ? 'Unmute hero video' : 'Mute hero video'}
           >
-            {isMuted || volume === 0 ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+            {isMuted ? 'Unmute' : 'Mute'}
           </button>
           <input
             type="range"
@@ -368,7 +312,7 @@ export default function HeroSection() {
                 whileHover={{ y: -6 }}
                 className="space-y-3 rounded-2xl border border-gold-500/20 bg-stone-900/60 p-6 shadow-lg backdrop-blur-md transition-all hover:border-gold-500/40"
               >
-                <span className="inline-block rounded-full border border-gold-500/20 bg-gold-500/10 px-3 py-1 text-xs font-medium text-gold-300">
+                <span className="inline-block rounded-full border border-gold-500/20 bg-gold-500/10 px-3 py-1 text-xs font-medium uppercase tracking-wider text-gold-300">
                   {genre.tag}
                 </span>
                 <h3 className="font-serif text-xl font-semibold text-stone-100">{genre.title}</h3>

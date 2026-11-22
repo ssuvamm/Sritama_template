@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Camera, Maximize2, Sparkles } from 'lucide-react';
 import ImageModal from './ImageModal';
 
 interface GalleryPhoto {
@@ -82,7 +81,6 @@ export default function ImagesSection() {
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-900/80 border border-gold-500/30 text-gold-400 text-xs sm:text-sm font-medium backdrop-blur-md"
           >
-            <Camera className="w-4 h-4" />
             <span>Photo Gallery</span>
           </motion.div>
 
@@ -129,11 +127,6 @@ export default function ImagesSection() {
 
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
-
-                {/* Lightbox Expand Icon */}
-                <div className="absolute top-4 right-4 w-9 h-9 rounded-full bg-stone-950/70 border border-gold-500/30 text-gold-400 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all transform translate-y-2 group-hover:translate-y-0 shadow-md">
-                  <Maximize2 className="w-4 h-4" />
-                </div>
 
                 {/* Caption Details */}
                 <div className="absolute bottom-0 inset-x-0 p-5 space-y-1 transform translate-y-2 group-hover:translate-y-0 transition-transform">

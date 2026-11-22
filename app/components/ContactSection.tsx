@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, User, Send, CheckCircle2, MessageSquare, MapPin } from 'lucide-react';
-import { YoutubeIcon, InstagramIcon } from './Icons';
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -48,7 +46,6 @@ export default function ContactSection() {
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-900/80 border border-gold-500/30 text-gold-400 text-xs sm:text-sm font-medium backdrop-blur-md"
           >
-            <Mail className="w-4 h-4" />
             <span>Booking & Inquiries</span>
           </motion.div>
 
@@ -90,9 +87,6 @@ export default function ContactSection() {
 
               <div className="space-y-4 pt-2">
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-gold-500/10 border border-gold-500/20 flex items-center justify-center text-gold-400 shrink-0 mt-0.5">
-                    <MapPin className="w-5 h-5" />
-                  </div>
                   <div>
                     <h4 className="text-sm font-semibold text-stone-200">Location</h4>
                     <p className="text-xs text-stone-400">United States (Available for global concerts)</p>
@@ -100,9 +94,6 @@ export default function ContactSection() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-gold-500/10 border border-gold-500/20 flex items-center justify-center text-gold-400 shrink-0 mt-0.5">
-                    <Mail className="w-5 h-5" />
-                  </div>
                   <div>
                     <h4 className="text-sm font-semibold text-stone-200">Email Inquiries</h4>
                     <p className="text-xs text-stone-400">Direct booking requests & event schedules</p>
@@ -122,7 +113,6 @@ export default function ContactSection() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-stone-950 border border-stone-800 text-stone-300 hover:text-red-400 hover:border-red-500/40 transition-colors text-xs font-medium"
                   >
-                    <YoutubeIcon className="w-4 h-4 text-red-500" />
                     <span>YouTube</span>
                   </a>
                   <a
@@ -131,7 +121,6 @@ export default function ContactSection() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-stone-950 border border-stone-800 text-stone-300 hover:text-pink-400 hover:border-pink-500/40 transition-colors text-xs font-medium"
                   >
-                    <InstagramIcon className="w-4 h-4 text-pink-400" />
                     <span>Instagram</span>
                   </a>
                 </div>
@@ -157,7 +146,6 @@ export default function ContactSection() {
                   animate={{ opacity: 1, scale: 1 }}
                   className="p-8 rounded-xl bg-gold-500/10 border border-gold-500/30 text-center space-y-4"
                 >
-                  <CheckCircle2 className="w-12 h-12 text-gold-400 mx-auto animate-bounce" />
                   <h4 className="font-serif text-xl font-bold text-gold-300">
                     Thank You for Reaching Out!
                   </h4>
@@ -180,7 +168,6 @@ export default function ContactSection() {
                         Your Full Name *
                       </label>
                       <div className="relative">
-                        <User className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-500" />
                         <input
                           type="text"
                           id="name"
@@ -189,7 +176,7 @@ export default function ContactSection() {
                           value={formData.name}
                           onChange={handleChange}
                           placeholder="e.g. Priyanjali Sen"
-                          className="w-full pl-10 pr-4 py-3 rounded-xl bg-stone-950/80 border border-stone-800 text-stone-100 text-sm focus:outline-none focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/40 transition-all placeholder:text-stone-600"
+                          className="w-full px-4 py-3 rounded-xl bg-stone-950/80 border border-stone-800 text-stone-100 text-sm focus:outline-none focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/40 transition-all placeholder:text-stone-600"
                         />
                       </div>
                     </div>
@@ -200,7 +187,6 @@ export default function ContactSection() {
                         Email Address *
                       </label>
                       <div className="relative">
-                        <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-500" />
                         <input
                           type="email"
                           id="email"
@@ -209,7 +195,7 @@ export default function ContactSection() {
                           value={formData.email}
                           onChange={handleChange}
                           placeholder="you@example.com"
-                          className="w-full pl-10 pr-4 py-3 rounded-xl bg-stone-950/80 border border-stone-800 text-stone-100 text-sm focus:outline-none focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/40 transition-all placeholder:text-stone-600"
+                          className="w-full px-4 py-3 rounded-xl bg-stone-950/80 border border-stone-800 text-stone-100 text-sm focus:outline-none focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/40 transition-all placeholder:text-stone-600"
                         />
                       </div>
                     </div>
@@ -241,7 +227,6 @@ export default function ContactSection() {
                       Message / Event Details *
                     </label>
                     <div className="relative">
-                      <MessageSquare className="w-4 h-4 absolute left-3.5 top-3 text-stone-500" />
                       <textarea
                         id="message"
                         name="message"
@@ -250,7 +235,7 @@ export default function ContactSection() {
                         value={formData.message}
                         onChange={handleChange}
                         placeholder="Please share details about your event, preferred dates, venue, or proposed collaboration..."
-                        className="w-full pl-10 pr-4 py-3 rounded-xl bg-stone-950/80 border border-stone-800 text-stone-100 text-sm focus:outline-none focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/40 transition-all placeholder:text-stone-600 resize-none"
+                        className="w-full px-4 py-3 rounded-xl bg-stone-950/80 border border-stone-800 text-stone-100 text-sm focus:outline-none focus:border-gold-500/60 focus:ring-1 focus:ring-gold-500/40 transition-all placeholder:text-stone-600 resize-none"
                       ></textarea>
                     </div>
                   </div>
@@ -264,10 +249,7 @@ export default function ContactSection() {
                     {loading ? (
                       <span>Sending Message...</span>
                     ) : (
-                      <>
-                        <Send className="w-4 h-4" />
-                        <span>Send Booking Inquiry</span>
-                      </>
+                      <span>Send Booking Inquiry</span>
                     )}
                   </button>
                 </form>

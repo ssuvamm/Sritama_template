@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ["var(--font-serif)", "Playfair Display", "Georgia", "serif"],
-        sans: ["var(--font-sans)", "Plus Jakarta Sans", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Cormorant Garamond", "Georgia", "serif"],
+        sans: ["var(--font-sans)", "Lato", "system-ui", "sans-serif"],
       },
       colors: {
         gold: {

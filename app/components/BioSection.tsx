@@ -3,34 +3,29 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Award, BookOpen, Music, Radio, Globe, Calendar, ArrowRight, Mic } from 'lucide-react';
 
 const timelineEvents = [
   {
     year: '10-Year Tenure',
     title: 'All India Radio Artist & Presenter',
-    icon: Radio,
     description:
       'Engaged as a junior artist for a decade at All India Radio. Broadened her repertoire through news reading, anchoring iconic radio programs such as Sishu Mahal, Chhutir Ghanta, and Golpo Dadur Ashor, alongside acclaimed poetry recitations.',
   },
   {
     year: 'Dhrupad & Khayal',
     title: 'Classical Training & Lineage',
-    icon: Music,
     description:
       'Commenced formal vocal music training at age 12. Learned Dhrupad at Dagar Ashram from Aloka Nandi (disciple of Ustad Moinuddin Dagar). Mastered Khayal under Vidushi Suranjana Bose (disciple of Meera Bandopadhyay, Prasun Bandopadhyay & Padmabibhushan Girija Devi), with further guidance from Srimati Lopamudra Mitra.',
   },
   {
     year: 'Acclaimed Productions',
     title: 'Concerts & Original Releases',
-    icon: Award,
     description:
       'Performed in major musical concerts across Kolkata. Co-created the celebrated joint production "Eita Tomar Gaan" alongside Pratyaya Raha, earning widespread acclaim for three consecutive years. Recorded original songs in 2021 and 2022.',
   },
   {
     year: 'Present Day',
     title: 'US Residency & Global Stage',
-    icon: Globe,
     description:
       'Currently residing in the United States while remaining deeply connected to cultural activities. Notable performances include Bangamela 2023 in the Bay Area, California, as well as solo concerts across diverse genres: Tagore (Rabindra Sangeet), Contemporary, Folk, Recitation, and Anchoring.',
   },
@@ -50,7 +45,6 @@ export default function BioSection() {
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-900/80 border border-gold-500/30 text-gold-400 text-xs sm:text-sm font-medium backdrop-blur-md"
           >
-            <BookOpen className="w-4 h-4" />
             <span>Biography & Lineage</span>
           </motion.div>
 
@@ -109,9 +103,8 @@ export default function BioSection() {
             className="lg:col-span-7 space-y-6"
           >
             <div className="p-6 sm:p-8 rounded-2xl bg-stone-900/60 border border-gold-500/20 backdrop-blur-md space-y-4 shadow-xl">
-              <h3 className="font-serif text-2xl font-semibold text-gold-300 flex items-center gap-3">
-                <Music className="w-6 h-6 text-gold-400 shrink-0" />
-                <span>The Classical Foundation</span>
+              <h3 className="font-serif text-2xl font-semibold text-gold-300">
+                The Classical Foundation
               </h3>
               <p className="text-stone-300 text-sm sm:text-base leading-relaxed">
                 Sritama&apos;s musical voyage began at the age of 12. She was tutored in the ancient art of <strong className="text-gold-400 font-medium">Dhrupad</strong> at Dagar Ashram by Srimati Aloka Nandi, a disciple of the legendary Ustad Moinuddin Dagar. 
@@ -122,9 +115,8 @@ export default function BioSection() {
             </div>
 
             <div className="p-6 sm:p-8 rounded-2xl bg-stone-900/60 border border-gold-500/20 backdrop-blur-md space-y-4 shadow-xl">
-              <h3 className="font-serif text-2xl font-semibold text-gold-300 flex items-center gap-3">
-                <Mic className="w-6 h-6 text-gold-400 shrink-0" />
-                <span>Concerts, Stage & International Impact</span>
+              <h3 className="font-serif text-2xl font-semibold text-gold-300">
+                Concerts, Stage &amp; International Impact
               </h3>
               <p className="text-stone-300 text-sm sm:text-base leading-relaxed">
                 Having headlined numerous concerts across Kolkata, Sritama co-produced <strong className="text-gold-400 font-medium">&apos;Eita Tomar Gaan&apos;</strong> with Pratyaya Raha, garnering acclaim for three consecutive seasons. In 2021 and 2022, she released her original compositions.
@@ -149,7 +141,6 @@ export default function BioSection() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {timelineEvents.map((event, idx) => {
-              const Icon = event.icon;
               return (
                 <motion.div
                   key={idx}
@@ -160,9 +151,6 @@ export default function BioSection() {
                   className="p-6 rounded-2xl bg-stone-900/60 border border-gold-500/20 backdrop-blur-md space-y-4 hover:border-gold-500/40 transition-all shadow-lg flex flex-col justify-between"
                 >
                   <div className="space-y-3">
-                    <div className="w-12 h-12 rounded-xl bg-gold-500/10 border border-gold-500/20 flex items-center justify-center text-gold-400">
-                      <Icon className="w-6 h-6" />
-                    </div>
                     <span className="text-xs uppercase font-bold tracking-widest text-gold-400 block">
                       {event.year}
                     </span>
@@ -189,7 +177,6 @@ export default function BioSection() {
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-semibold uppercase tracking-wider bg-gradient-to-r from-gold-500 via-amber-500 to-gold-600 text-stone-950 hover:brightness-110 shadow-xl shadow-gold-500/20 hover:shadow-gold-500/40 transition-all transform hover:-translate-y-0.5"
             >
               <span>Get in Touch</span>
-              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>

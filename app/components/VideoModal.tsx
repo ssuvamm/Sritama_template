@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
 
 interface VideoModalProps {
   isOpen: boolean;
@@ -63,7 +62,7 @@ export default function VideoModal({ isOpen, videoUrl, title, onClose }: VideoMo
                 className="p-2 rounded-full text-stone-400 hover:text-gold-300 hover:bg-stone-800 transition-colors focus:outline-none"
                 aria-label="Close modal"
               >
-                <X className="w-6 h-6" />
+                Close
               </button>
             </div>
 

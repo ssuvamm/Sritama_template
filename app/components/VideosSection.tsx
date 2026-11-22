@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Mic2, Film, Sparkles, Filter } from 'lucide-react';
 import VideoModal from './VideoModal';
 
 interface VideoItem {
@@ -83,7 +82,6 @@ export default function VideosSection() {
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-900/80 border border-gold-500/30 text-gold-400 text-xs sm:text-sm font-medium backdrop-blur-md"
           >
-            <Film className="w-4 h-4" />
             <span>Music & Video Gallery</span>
           </motion.div>
 
@@ -172,7 +170,6 @@ export default function VideosSection() {
                       onClick={() => setSelectedVideo(video)}
                       className="inline-flex items-center gap-1.5 text-gold-400 hover:text-gold-300 font-medium transition-colors"
                     >
-                      <Play className="w-3.5 h-3.5 fill-gold-400" />
                       <span>Watch Full Screen</span>
                     </button>
                   </div>
