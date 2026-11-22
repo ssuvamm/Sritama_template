@@ -1,11 +1,30 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Play, Sparkles, Music, Award, Globe, Mic, ArrowRight } from 'lucide-react';
-import VideoModal from './VideoModal';
+import {
+  Play,
+  Pause,
+  Volume2,
+  VolumeX,
+  Sparkles,
+  Music,
+  Award,
+  Globe,
+  Mic,
+  ArrowRight,
+} from 'lucide-react';
+
+const HERO_VIDEO_ID = 'W-xfKXI225w';
+const HERO_VIDEO_TITLE = 'Sritama Basu — Live Classical Performance Highlight';
+
+declare global {
+  interface Window {
+    YT: any;
+    onYouTubeIframeAPIReady?: () => void;
+  }
+}
 
 const highlightStats = [
   {
@@ -48,176 +67,317 @@ const featuredGenres = [
   },
 ];
 
-export default function HeroSection() {
-  const [selectedVideo, setSelectedVideo] = useState<{ url: string; title: string } | null>(null);
+// Every hero element now enters from above and settles downward.
+const slideDown = (delay: number) => ({
+  initial: { opacity: 0, y: -28 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.75, delay, ease: [0.22, 1, 0.36, 1] as const },
+});
 
-  const featuredVideo = {
-    url: 'https://www.youtube.com/embed/W-xfKXI225w',
-    title: 'Sritama Basu — Live Classical Performance Highlight',
-    thumbnail: '/2up.jpg',
+export default function HeroSection() {
+  const playerRef = useRef<any>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [volume, setVolume] = useState(30);
+  const [needsGesture, setNeedsGesture] = useState(false);
+
+  useEffect(() => {
+    let disposed = false;
+
+    const setupPlayer = () => {
+      if (disposed || !window.YT?.Player) return;
+
+      playerRef.current = new window.YT.Player('hero-youtube-player', {
+        videoId: HERO_VIDEO_ID,
+        playerVars: {
+          autoplay: 1,
+          controls: 0,
+          disablekb: 1,
+          enablejsapi: 1,
+          fs: 0,
+          iv_load_policy: 3,
+          loop: 1,
+          playlist: HERO_VIDEO_ID,
+          modestbranding: 1,
+          playsinline: 1,
+          rel: 0,
+          origin: window.location.origin,
+        },
+        events: {
+          onReady: (event: any) => {
+            event.target.setVolume(30);
+            event.target.unMute();
+            event.target.playVideo();
+          },
+          onStateChange: (event: any) => {
+            const playing = event.data === window.YT.PlayerState.PLAYING;
+            setIsPlaying(playing);
+            if (playing) setNeedsGesture(false);
+          },
+        },
+      });
+    };
+
+    if (window.YT?.Player) {
+      setupPlayer();
+    } else {
+      const previous = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => {
+        previous?.();
+        setupPlayer();
+      };
+      if (!document.querySelector('script[data-youtube-iframe-api]')) {
+        const script = document.createElement('script');
+        script.src = 'https://www.youtube.com/iframe_api';
+        script.dataset.youtubeIframeApi = 'true';
+        document.head.appendChild(script);
+      }
+    }
+
+    // Browsers often block autoplay-with-sound; offer a one-tap retry if it never starts.
+    const nudge = window.setTimeout(() => {
+      if (playerRef.current?.getPlayerState?.() !== window.YT?.PlayerState?.PLAYING) {
+        setNeedsGesture(true);
+      }
+    }, 2500);
+
+    return () => {
+      disposed = true;
+      window.clearTimeout(nudge);
+      try {
+        playerRef.current?.destroy?.();
+      } catch {
+        /* player may already be gone */
+      }
+      playerRef.current = null;
+    };
+  }, []);
+
+  const togglePlay = () => {
+    const player = playerRef.current;
+    if (!player) return;
+    if (isPlaying) {
+      player.pauseVideo();
+    } else {
+      player.unMute();
+      player.playVideo();
+    }
+  };
+
+  const startWithSound = () => {
+    const player = playerRef.current;
+    if (!player) return;
+    player.setVolume(30);
+    player.unMute();
+    player.playVideo();
+    setNeedsGesture(false);
+    setIsMuted(false);
+    setVolume(30);
+  };
+
+  const changeVolume = (next: number) => {
+    setVolume(next);
+    const player = playerRef.current;
+    if (!player) return;
+    player.setVolume(next);
+    if (next > 0) {
+      player.unMute();
+      setIsMuted(false);
+    } else {
+      player.mute();
+      setIsMuted(true);
+    }
+  };
+
+  const toggleMute = () => {
+    const player = playerRef.current;
+    const next = !isMuted;
+    setIsMuted(next);
+    if (!player) return;
+    if (next) {
+      player.mute();
+    } else {
+      player.unMute();
+      if (volume === 0) changeVolume(30);
+    }
   };
 
   return (
-    <section className="relative overflow-hidden py-12 lg:py-20">
-      {/* Light glow effects */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-gold-500/10 rounded-full blur-3xl pointer-events-none" />
+    <section className="relative overflow-hidden">
+      {/* ---------- Full-bleed video stage ---------- */}
+      <div className="relative flex min-h-[92vh] items-center">
+        <div className="absolute inset-0 overflow-hidden bg-stone-950">
+          {/* 16:9 video scaled to cover the viewport */}
+          <div className="absolute left-1/2 top-1/2 h-[max(56.25vw,100vh)] w-[max(100vw,177.78vh)] -translate-x-1/2 -translate-y-1/2">
+            <div id="hero-youtube-player" className="pointer-events-none h-full w-full" />
+          </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Left Column: Bio & CTA */}
-          <div className="lg:col-span-7 space-y-6 text-left">
+          {/* Fades that keep the copy legible above the moving footage */}
+          <div className="absolute inset-0 bg-gradient-to-r from-stone-950 via-stone-950/85 to-stone-950/25 sm:to-stone-950/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-stone-950/70" />
+          <div className="pointer-events-none absolute -left-40 top-1/4 h-[600px] w-[600px] rounded-full bg-gold-500/10 blur-3xl" />
+        </div>
+
+        {/* Copy floats over the video */}
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-28 sm:px-6 lg:px-8">
+          <div className="max-w-3xl space-y-6">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-900/80 border border-gold-500/30 text-gold-400 text-xs sm:text-sm font-medium backdrop-blur-md"
+              {...slideDown(0.05)}
+              className="inline-flex items-center gap-2 rounded-full border border-gold-500/30 bg-stone-950/70 px-4 py-1.5 text-xs font-medium text-gold-400 backdrop-blur-md sm:text-sm"
             >
-              <Sparkles className="w-4 h-4 text-gold-400" />
-              <span>Classical & Contemporary Vocalist</span>
+              <Sparkles className="h-4 w-4 text-gold-400" />
+              <span>Classical &amp; Contemporary Vocalist</span>
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-gold-gradient leading-tight"
+              {...slideDown(0.15)}
+              className="font-serif text-4xl font-bold leading-tight tracking-tight text-gold-gradient sm:text-6xl lg:text-7xl"
             >
               Sritama Basu
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-stone-300 text-base sm:text-xl font-light leading-relaxed max-w-2xl"
+              {...slideDown(0.25)}
+              className="max-w-2xl text-base font-light leading-relaxed text-stone-200 sm:text-xl"
             >
               Honoring rich Indian classical traditions of Dhrupad and Khayal, while captivating audiences across Rabindra Sangeet, contemporary melodies, and live stage anchoring.
             </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap items-center gap-4 pt-2"
-            >
+            <motion.div {...slideDown(0.35)} className="flex flex-wrap items-center gap-4 pt-2">
               <Link
                 href="/videos"
-                className="px-7 py-3.5 rounded-full text-sm font-semibold uppercase tracking-wider bg-gradient-to-r from-gold-500 via-amber-500 to-gold-600 text-stone-950 hover:brightness-110 shadow-xl shadow-gold-500/20 hover:shadow-gold-500/40 transition-all transform hover:-translate-y-0.5 flex items-center gap-2"
+                className="flex items-center gap-2 rounded-full bg-gradient-to-r from-gold-500 via-amber-500 to-gold-600 px-7 py-3.5 text-sm font-semibold uppercase tracking-wider text-stone-950 shadow-xl shadow-gold-500/20 transition-all hover:-translate-y-0.5 hover:brightness-110 hover:shadow-gold-500/40"
               >
-                <Play className="w-4 h-4 fill-stone-950" />
+                <Play className="h-4 w-4 fill-stone-950" />
                 <span>Explore Music</span>
               </Link>
 
               <Link
                 href="/bio"
-                className="px-7 py-3.5 rounded-full text-sm font-semibold tracking-wider bg-stone-900/80 border border-gold-500/30 text-gold-300 hover:bg-stone-800/80 hover:border-gold-500/50 transition-all backdrop-blur-md flex items-center gap-2"
+                className="flex items-center gap-2 rounded-full border border-gold-500/30 bg-stone-950/70 px-7 py-3.5 text-sm font-semibold tracking-wider text-gold-300 backdrop-blur-md transition-all hover:border-gold-500/50 hover:bg-stone-900/80"
               >
                 <span>Read Biography</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </motion.div>
+          </div>
 
-            {/* Quick Stat Tags */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="pt-6 border-t border-stone-800/60 grid grid-cols-2 sm:grid-cols-4 gap-4"
-            >
-              {highlightStats.map((stat, idx) => {
+          {/* Something extra where the old stat row used to sit */}
+          <motion.div {...slideDown(0.5)} className="mt-10 max-w-3xl space-y-4">
+            <div className="flex items-center gap-4 rounded-2xl border border-gold-500/30 bg-stone-950/65 p-4 shadow-2xl backdrop-blur-md">
+              <div className="flex h-9 items-end gap-1" aria-hidden="true">
+                {[14, 26, 18, 34, 22, 30, 16].map((height, index) => (
+                  <span
+                    key={index}
+                    className="w-1 animate-pulse rounded-full bg-gold-400"
+                    style={{ height, animationDelay: `${index * 130}ms` }}
+                  />
+                ))}
+              </div>
+              <div className="min-w-0 flex-1 space-y-1">
+                <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-gold-400">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
+                  </span>
+                  On Air · Now Playing
+                </div>
+                <p className="truncate text-sm font-medium text-stone-100">{HERO_VIDEO_TITLE}</p>
+              </div>
+              <div className="hidden text-right text-[10px] uppercase tracking-widest text-stone-500 sm:block">
+                Live from the stage
+                <br />
+                Vol {volume}%
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              {highlightStats.map((stat, index) => {
                 const Icon = stat.icon;
                 return (
-                  <div key={idx} className="space-y-1">
-                    <div className="flex items-center gap-2 text-gold-400">
-                      <Icon className="w-4 h-4" />
-                      <span className="text-sm font-semibold text-stone-200">{stat.title}</span>
-                    </div>
-                    <p className="text-xs text-stone-400 leading-snug">{stat.desc}</p>
+                  <div
+                    key={index}
+                    title={stat.desc}
+                    className="flex items-center gap-2 rounded-full border border-gold-500/20 bg-stone-950/60 px-3 py-1.5 text-[11px] text-stone-300 backdrop-blur-md transition-colors hover:border-gold-500/40 hover:text-gold-300"
+                  >
+                    <Icon className="h-3.5 w-3.5 text-gold-400" />
+                    <span>{stat.title}</span>
                   </div>
                 );
               })}
-            </motion.div>
-          </div>
-
-          {/* Right Column: Hero Artist Card & Video Preview */}
-          <div className="lg:col-span-5">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="relative group rounded-3xl overflow-hidden bg-glass-card border border-gold-500/30 shadow-2xl gold-border-glow p-3"
-            >
-              <div className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden bg-stone-900">
-                <Image
-                  src="/2bwup.jpg"
-                  alt="Sritama Basu performing classical music"
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 500px"
-                  className="object-cover object-center group-hover:scale-105 transition-transform duration-700 filter brightness-95 contrast-105"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/20 to-transparent" />
-
-                {/* Floating Video Highlight Card Overlay */}
-                <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-stone-950/80 backdrop-blur-md border border-gold-500/25 flex items-center justify-between gap-3">
-                  <div className="space-y-0.5">
-                    <span className="text-[10px] uppercase font-bold tracking-widest text-gold-400">
-                      Featured Performance
-                    </span>
-                    <h4 className="text-xs font-semibold text-stone-100 line-clamp-1">
-                      {featuredVideo.title}
-                    </h4>
-                  </div>
-                  <button
-                    onClick={() => setSelectedVideo({ url: featuredVideo.url, title: featuredVideo.title })}
-                    className="w-10 h-10 rounded-full bg-gold-500 text-stone-950 flex items-center justify-center shadow-lg hover:scale-110 transition-transform shrink-0"
-                    aria-label="Play featured performance video"
-                  >
-                    <Play className="w-5 h-5 fill-stone-950 ml-0.5" />
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
 
-        {/* Artistry & Genre Highlights */}
+        {/* One-tap fallback when the browser blocks autoplay with sound */}
+        {needsGesture && (
+          <button
+            onClick={startWithSound}
+            className="absolute left-1/2 top-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full border border-gold-500/50 bg-stone-950/80 px-5 py-3 text-xs font-semibold uppercase tracking-widest text-gold-300 shadow-2xl backdrop-blur-md transition hover:bg-stone-900"
+          >
+            <Play className="h-4 w-4 fill-gold-300" />
+            Tap to play with sound
+          </button>
+        )}
+
+        {/* Player controls - pause / mute / volume (starts at 30%) */}
+        <div className="absolute bottom-6 right-4 z-20 flex items-center gap-3 rounded-full border border-gold-500/25 bg-stone-950/75 px-3 py-2 shadow-xl backdrop-blur-md sm:right-8">
+          <button
+            onClick={togglePlay}
+            className="text-gold-300 transition hover:text-gold-100"
+            aria-label={isPlaying ? 'Pause hero video' : 'Play hero video'}
+          >
+            {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+          </button>
+          <button
+            onClick={toggleMute}
+            className="text-gold-300 transition hover:text-gold-100"
+            aria-label={isMuted ? 'Unmute hero video' : 'Mute hero video'}
+          >
+            {isMuted || volume === 0 ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+          </button>
+          <input
+            type="range"
+            min={0}
+            max={100}
+            value={isMuted ? 0 : volume}
+            onChange={(event) => changeVolume(Number(event.target.value))}
+            aria-label="Hero video volume"
+            className="h-1 w-20 cursor-pointer accent-gold-500 sm:w-28"
+          />
+          <span className="w-8 text-right text-[10px] tabular-nums text-gold-300">{volume}%</span>
+        </div>
+      </div>
+
+      {/* ---------- Artistry & Genre Highlights ---------- */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mt-24 space-y-8">
-          <div className="text-center space-y-2">
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-gold-gradient">
-              Musical Artistry & Genres
+          <div className="space-y-2 text-center">
+            <h2 className="font-serif text-3xl font-bold text-gold-gradient sm:text-4xl">
+              Musical Artistry &amp; Genres
             </h2>
-            <p className="text-stone-400 text-sm sm:text-base max-w-xl mx-auto">
+            <p className="mx-auto max-w-xl text-sm text-stone-400 sm:text-base">
               A comprehensive repertoire spanning rigorous classical traditions and modern melodic storytelling.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {featuredGenres.map((genre, idx) => (
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            {featuredGenres.map((genre, index) => (
               <motion.div
-                key={idx}
+                key={index}
                 whileHover={{ y: -6 }}
-                className="p-6 rounded-2xl bg-stone-900/60 border border-gold-500/20 hover:border-gold-500/40 backdrop-blur-md transition-all space-y-3 shadow-lg"
+                className="space-y-3 rounded-2xl border border-gold-500/20 bg-stone-900/60 p-6 shadow-lg backdrop-blur-md transition-all hover:border-gold-500/40"
               >
-                <span className="inline-block px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/20 text-gold-300 text-xs font-medium">
+                <span className="inline-block rounded-full border border-gold-500/20 bg-gold-500/10 px-3 py-1 text-xs font-medium text-gold-300">
                   {genre.tag}
                 </span>
                 <h3 className="font-serif text-xl font-semibold text-stone-100">{genre.title}</h3>
-                <p className="text-stone-400 text-sm leading-relaxed">{genre.description}</p>
+                <p className="text-sm leading-relaxed text-stone-400">{genre.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </div>
-
-      {/* Lightbox Modal */}
-      <VideoModal
-        isOpen={!!selectedVideo}
-        videoUrl={selectedVideo?.url || null}
-        title={selectedVideo?.title}
-        onClose={() => setSelectedVideo(null)}
-      />
     </section>
   );
 }
