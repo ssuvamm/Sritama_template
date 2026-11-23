@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Disc3 } from 'lucide-react';
+import { Mail, Disc3 } from 'lucide-react';
+import { YoutubeIcon, InstagramIcon } from './Icons';
 
 export default function Footer() {
   return (
@@ -46,28 +47,31 @@ export default function Footer() {
 
           <div className="md:col-span-3 space-y-4">
             <h4 className="font-serif text-lg font-semibold text-gold-300">Connect</h4>
-            <div className="flex flex-wrap gap-3 text-sm">
+            <div className="flex items-center gap-3">
               <a
                 href="https://www.youtube.com/@SritamaBasu/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full border border-gold-500/20 px-4 py-2 text-stone-300 transition-colors hover:border-gold-500/40 hover:text-gold-300"
+                className="w-10 h-10 rounded-full bg-stone-900 border border-gold-500/20 flex items-center justify-center text-stone-300 hover:text-red-500 hover:border-red-500/40 hover:bg-stone-800 transition-all shadow-sm"
+                aria-label="YouTube Channel"
               >
-                YouTube
+                <YoutubeIcon className="w-5 h-5" />
               </a>
               <a
                 href="https://www.instagram.com/sritamabasu/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-full border border-gold-500/20 px-4 py-2 text-stone-300 transition-colors hover:border-gold-500/40 hover:text-gold-300"
+                className="w-10 h-10 rounded-full bg-stone-900 border border-gold-500/20 flex items-center justify-center text-stone-300 hover:text-pink-400 hover:border-pink-400/40 hover:bg-stone-800 transition-all shadow-sm"
+                aria-label="Instagram Profile"
               >
-                Instagram
+                <InstagramIcon className="w-5 h-5" />
               </a>
               <Link
                 href="/contact"
-                className="rounded-full border border-gold-500/20 px-4 py-2 text-stone-300 transition-colors hover:border-gold-500/40 hover:text-gold-300"
+                className="w-10 h-10 rounded-full bg-stone-900 border border-gold-500/20 flex items-center justify-center text-stone-300 hover:text-gold-400 hover:border-gold-500/40 hover:bg-stone-800 transition-all shadow-sm"
+                aria-label="Contact Email"
               >
-                Email
+                <Mail className="w-5 h-5" />
               </Link>
             </div>
             <p className="text-xs text-stone-400">

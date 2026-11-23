@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { YoutubeIcon, InstagramIcon } from './Icons';
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -113,6 +114,7 @@ export default function ContactSection() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-stone-950 border border-stone-800 text-stone-300 hover:text-red-400 hover:border-red-500/40 transition-colors text-xs font-medium"
                   >
+                    <YoutubeIcon className="w-4 h-4 text-red-500" />
                     <span>YouTube</span>
                   </a>
                   <a
@@ -121,6 +123,7 @@ export default function ContactSection() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 px-4 py-2 rounded-xl bg-stone-950 border border-stone-800 text-stone-300 hover:text-pink-400 hover:border-pink-500/40 transition-colors text-xs font-medium"
                   >
+                    <InstagramIcon className="w-4 h-4 text-pink-400" />
                     <span>Instagram</span>
                   </a>
                 </div>

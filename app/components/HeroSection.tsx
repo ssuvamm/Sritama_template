@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 
 const HERO_VIDEO_ID = 'W-xfKXI225w';
 const HERO_VIDEO_TITLE = 'Sritama Basu — Live Classical Performance Highlight';
@@ -225,11 +226,23 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* On Air strip - typography only, no decorative glyphs */}
           <motion.div {...slideDown(0.5)} className="mt-10 max-w-3xl space-y-4">
-            <div className="flex items-center justify-between gap-4 rounded-2xl border border-gold-500/30 bg-stone-950/65 p-4 shadow-2xl backdrop-blur-md">
-              <div className="min-w-0 space-y-1">
-                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold-400">
+            <div className="flex items-center gap-4 rounded-2xl border border-gold-500/30 bg-stone-950/65 p-4 shadow-2xl backdrop-blur-md">
+              <div className="flex h-9 items-end gap-1" aria-hidden="true">
+                {[14, 26, 18, 34, 22, 30, 16].map((height, index) => (
+                  <span
+                    key={index}
+                    className="w-1 animate-pulse rounded-full bg-gold-400"
+                    style={{ height, animationDelay: `${index * 130}ms` }}
+                  />
+                ))}
+              </div>
+              <div className="min-w-0 flex-1 space-y-1">
+                <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-gold-400">
+                  <span className="relative flex h-2 w-2" aria-hidden="true">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-red-500" />
+                  </span>
                   On Air · Now Playing
                 </div>
                 <p className="truncate text-sm font-medium text-stone-100">{HERO_VIDEO_TITLE}</p>
@@ -258,27 +271,27 @@ export default function HeroSection() {
         {needsGesture && (
           <button
             onClick={startWithSound}
-            className="absolute left-1/2 top-1/2 z-20 -translate-x-1/2 -translate-y-1/2 rounded-full border border-gold-500/50 bg-stone-950/80 px-5 py-3 text-xs font-semibold uppercase tracking-widest text-gold-300 shadow-2xl backdrop-blur-md transition hover:bg-stone-900"
+            className="absolute left-1/2 top-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2 items-center gap-2 rounded-full border border-gold-500/50 bg-stone-950/80 px-5 py-3 text-xs font-semibold uppercase tracking-widest text-gold-300 shadow-2xl backdrop-blur-md transition hover:bg-stone-900"
           >
+            <Play className="h-4 w-4 fill-gold-300" />
             Tap to play with sound
           </button>
         )}
 
-        <div className="absolute bottom-6 right-4 z-20 flex items-center gap-3 rounded-full border border-gold-500/25 bg-stone-950/75 px-4 py-2 shadow-xl backdrop-blur-md sm:right-8">
+        <div className="absolute bottom-6 right-4 z-20 flex items-center gap-3 rounded-full border border-gold-500/25 bg-stone-950/75 px-3 py-2 shadow-xl backdrop-blur-md sm:right-8">
           <button
             onClick={togglePlay}
-            className="text-xs font-semibold uppercase tracking-wider text-gold-300 transition hover:text-gold-100"
+            className="text-gold-300 transition hover:text-gold-100"
             aria-label={isPlaying ? 'Pause hero video' : 'Play hero video'}
           >
-            {isPlaying ? 'Pause' : 'Play'}
+            {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
           </button>
-          <span className="h-3 w-px bg-stone-700" />
           <button
             onClick={toggleMute}
-            className="text-xs font-semibold uppercase tracking-wider text-gold-300 transition hover:text-gold-100"
+            className="text-gold-300 transition hover:text-gold-100"
             aria-label={isMuted ? 'Unmute hero video' : 'Mute hero video'}
           >
-            {isMuted ? 'Unmute' : 'Mute'}
+            {isMuted || volume === 0 ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
           </button>
           <input
             type="range"
